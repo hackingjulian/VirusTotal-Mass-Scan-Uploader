@@ -22,7 +22,7 @@ if var == "hash":
             reader = csv.DictReader(csvfile)
     except:
         print("Error reading file")
-        
+        exit()
         for row in reader:
             target = row['target'].strip()
             url = f'https://www.virustotal.com/api/v3/files/{target}'
@@ -52,8 +52,7 @@ if var == "ip":
             reader = csv.DictReader(csvfile)
     except:
         print("Error reading file")
-    with open(fileName, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
+        exit()
         for row in reader:
             target = row['target'].strip()
             url = f'https://www.virustotal.com/api/v3/ip_addresses/{target}'
@@ -86,8 +85,7 @@ if var == "domain":
             reader = csv.DictReader(csvfile)
     except:
         print("Error reading file")
-    with open(fileName, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
+        exit()
         for row in reader:
             target = row['target'].strip()
             url = f'https://www.virustotal.com/api/v3/domains/{target}'
@@ -108,5 +106,3 @@ if var == "domain":
                         None
                 else:
                     print(f"{target} => suspicious: {stats['suspicious']} Vendors")
-
-
