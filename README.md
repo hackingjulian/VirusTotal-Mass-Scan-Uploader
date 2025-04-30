@@ -1,1 +1,1 @@
-![Uploading banner.png…]()
+![Banner](/banner.png)
