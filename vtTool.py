@@ -1,14 +1,14 @@
 import requests 
 import csv
 import pyfiglet
+import getpass
 
 ascii_art = pyfiglet.figlet_format("VirusToal Bulk Uploader")
 print("\033[1;32m" + ascii_art + "\033[0m")
 print("\033[1;36m{:>10}\033[0m : {}".format("Author", "Julian Moodie"))
 
 
-print("Enter Api Key")
-apikey = input()
+apikey = getpass.getpass("Enter Api Key: ")
 
 print("enter file name")
 fileName = input()
@@ -29,8 +29,8 @@ if var == "hash":
 
             headers = {'x-apikey': apikey}
             response = requests.get(url, headers=headers)
-            if response.status_code == 429:
-                print("Quota exceeded https://docs.virustotal.com/docs/higher-quota")
+            if response.status_code != 200:
+                print("Network Error or quota exceeded https://docs.virustotal.com/docs/higher-quota")
                 break
             else:
                 data = response.json()['data']['attributes']
@@ -60,11 +60,12 @@ if var == "ip":
 
             headers = {'x-apikey': apikey}
             response = requests.get(url, headers=headers)
-            if response.status_code == 429:
-                print("Quota exceeded https://docs.virustotal.com/docs/higher-quota")
+            if response.status_code != 200:
+                print("Network Error or quota exceeded https://docs.virustotal.com/docs/higher-quota")
                 break
             else:
                 data = response.json()['data']['attributes']
+                print(data)
                 stats = data['last_analysis_stats']
                 if stats['malicious'] > 0:
                     print(f"{target} => Malicious: {stats['malicious']} Vendors")
@@ -93,8 +94,8 @@ if var == "domain":
 
             headers = {'x-apikey': apikey}
             response = requests.get(url, headers=headers)
-            if response.status_code == 429:
-                print("Quota exceeded https://docs.virustotal.com/docs/higher-quota")
+            if response.status_code != 200:
+                print("Network Error or quota exceeded https://docs.virustotal.com/docs/higher-quota")
                 break
             else:
                 data = response.json()['data']['attributes']
