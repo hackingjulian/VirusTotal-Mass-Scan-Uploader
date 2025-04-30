@@ -1,7 +1,13 @@
 ![Banner](/banner.png)
 
-A simple python script I created to automate mass uploads from a csv file.
+## CSV Mass Upload Automation
 
-USAGE GUIDE:
-The script requires a column labeled target in the top cell to identify which column to parse. Make sure to include it before running the script. Example:
-![Alt Text](/usage.png)
+A simple Python script to automate bulk uploads from a CSV file.
+
+### 📘 Usage Guide
+
+To function correctly, the script expects a column labeled `target` in the header row. This label tells the script which column to parse for uploads.
+
+Example format:
+
+![Example CSV Format](/usage.png)
