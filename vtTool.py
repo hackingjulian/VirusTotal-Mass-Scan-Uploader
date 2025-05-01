@@ -22,27 +22,28 @@ if var == "hash":
             reader = csv.DictReader(csvfile)
     except:
         print("Error reading file")
+        exit()
         
-        for row in reader:
-            target = row['target'].strip()
-            url = f'https://www.virustotal.com/api/v3/files/{target}'
+    for row in reader:
+        target = row['target'].strip()
+        url = f'https://www.virustotal.com/api/v3/files/{target}'
 
-            headers = {'x-apikey': apikey}
-            response = requests.get(url, headers=headers)
-            if response.status_code != 200:
-                print("Network Error or quota exceeded https://docs.virustotal.com/docs/higher-quota")
-                break
+        headers = {'x-apikey': apikey}
+        response = requests.get(url, headers=headers)
+        if response.status_code != 200:
+            print("Network Error or quota exceeded https://docs.virustotal.com/docs/higher-quota")
+            break
+        else:
+            data = response.json()['data']['attributes']
+            stats = data['last_analysis_stats']
+            if stats['malicious'] > 0:
+                print(f"{target} => Malicious: {stats['malicious']} Vendors")
+                check = True
+            if stats['suspicious'] > 0:
+                if check == True:
+                    None
             else:
-                data = response.json()['data']['attributes']
-                stats = data['last_analysis_stats']
-                if stats['malicious'] > 0:
-                    print(f"{target} => Malicious: {stats['malicious']} Vendors")
-                    check = True
-                if stats['suspicious'] > 0:
-                    if check == True:
-                        None
-                else:
-                    print(f"{target} => suspicious: {stats['suspicious']} Vendors")
+                print(f"{target} => suspicious: {stats['suspicious']} Vendors")
 
     pass
 
@@ -52,6 +53,7 @@ if var == "ip":
             reader = csv.DictReader(csvfile)
     except:
         print("Error reading file")
+        exit()
     with open(fileName, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
@@ -86,6 +88,7 @@ if var == "domain":
             reader = csv.DictReader(csvfile)
     except:
         print("Error reading file")
+        exit()
     with open(fileName, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
