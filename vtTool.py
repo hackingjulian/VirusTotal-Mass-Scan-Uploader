@@ -10,7 +10,7 @@ print("\033[1;36m{:>10}\033[0m : {}".format("Author", "Julian Moodie"))
 
 apikey = getpass.getpass("Enter Api Key: ")
 
-print("enter file name")
+print("enter file name (csv)")
 fileName = input()
 
 print("hash, ip or domain...")
@@ -42,8 +42,8 @@ if var == "hash":
             if stats['suspicious'] > 0:
                 if check == True:
                     None
-            else:
-                print(f"{target} => suspicious: {stats['suspicious']} Vendors")
+                else:
+                    print(f"{target} => suspicious: {stats['suspicious']} Vendors")
 
     pass
 
@@ -75,8 +75,8 @@ if var == "ip":
                 if stats['suspicious'] > 0:
                     if check == True:
                         None
-                else:
-                    print(f"{target} => suspicious: {stats['suspicious']} Vendors")
+                    else:
+                        print(f"{target} => suspicious: {stats['suspicious']} Vendors")
 
 
 else:
@@ -109,5 +109,6 @@ if var == "domain":
                 if stats['suspicious'] > 0:
                     if check == True:
                         None
-                else:
-                    print(f"{target} => suspicious: {stats['suspicious']} Vendors")
+                    else:
+                        print(f"{target} => suspicious: {stats['suspicious']} Vendors")
+
